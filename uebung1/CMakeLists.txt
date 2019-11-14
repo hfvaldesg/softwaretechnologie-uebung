@@ -7,4 +7,4 @@ cmake_minimum_required(VERSION 2.8)
 project(uebung1)
 set (PROJECT_SOURCES punkt.h polygon.h rechteck.h)
 
-add_executable(uebung1 main.cpp ${PROJECT_SOURCES})
+add_executable(ue1 main.cpp ${PROJECT_SOURCES})
