@@ -9,12 +9,8 @@
 #include <cmath>
 #include <map>
 
-void printDiv(){
-    // Print divider
-    std::cout << "---- ---- ----" << std::endl;
-}
 
-Polygon ch_polygon(std::vector<Point> points){
+Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
     // Using Graham Scan Algorithm    
 
     // Find lowest y of the cloud of points
@@ -30,13 +26,16 @@ Polygon ch_polygon(std::vector<Point> points){
             }
         }
     }
-    std::cout << "Lowest point in the cloud: " << lowest_point << std::endl;
-    printDiv();
+    if(verbose == true){
+        std::cout << "\033[1m\u001b[36m\033[4mLowest point in the cloud\u001b[0m" << std::endl << std::endl;
+        std::cout << lowest_point <<std::endl;
+    }    
 
     // Cloud without the lowest point
     std::map<float, Point> cloud;
     for(auto point : points){
         if(!(point == lowest_point)){
+            // TODO: Check the case where more points have same angle, but different distances
             float angle = atan2(point.getY() - lowest_point.getY(), 
             point.getX() - lowest_point.getX());
             cloud.insert({angle, point});
@@ -45,13 +44,20 @@ Polygon ch_polygon(std::vector<Point> points){
 
     // Automatic sorted in map template
     std::vector <Point> sorted_points{lowest_point};
-    std::cout << "Sorted cloud of points (without lowest point)" << std::endl << std::endl;
+    if(verbose == true){
+        std::cout << "\033[1m\u001b[36m\033[4mSorted cloud of points (without lowest point)\u001b[0m" << std::endl << std::endl;
+    }
+
     for(auto point : cloud){
-        std::cout << point.second << ": " << point.first << std::endl;
+        if(verbose == true){
+            std::cout << point.second << ": " << point.first << std::endl;
+        }
         sorted_points.push_back(point.second); // Add point to vector
     }
-    printDiv();
-    std::cout << "Determine left and right turns" << std::endl << std::endl;
+    if(verbose == true){
+        std::cout << "\033[1m\u001b[36m\033[4mDetermine left and right turns\u001b[0m" << std::endl << std::endl;
+    }
+    
     // Iterate all the sorted points to create new vector of points (left/right turn part)
     std::vector <Point> polygon_points; // lowest point is the first point
     for(auto it = sorted_points.begin(); it != sorted_points.end(); ++it){
@@ -64,10 +70,13 @@ Polygon ch_polygon(std::vector<Point> points){
             Point p3 = *it;
             double cross_product = (p2.getX() - p1.getX()) * (p3.getY() - p2.getY())
                                 - (p2.getY() - p1.getY()) * (p3.getX() - p2.getX());
-            std::cout << "p1: " << p1 << std::endl;
-            std::cout << "p2: " << p2 << std::endl;
-            std::cout << "p3: " << p3 << std::endl;
-            std::cout << "cross product: " << cross_product << std::endl << std::endl;
+            if(verbose == true){
+                std::cout << "p1: " << p1 << std::endl;
+                std::cout << "p2: " << p2 << std::endl;
+                std::cout << "p3: " << p3 << std::endl;
+                std::cout << "cross product: " << cross_product << std::endl << std::endl;
+            }
+            
             if(cross_product < 0){
                 polygon_points.pop_back();
                 polygon_points.push_back(*it);
@@ -76,17 +85,17 @@ Polygon ch_polygon(std::vector<Point> points){
             }  
         }
     }
-    printDiv();
-    std::cout << "Points in the Convex Hull: " << std::endl << std::endl;
-    for(auto point : polygon_points){
-        std::cout << point << std::endl;
+    if(verbose == true){
+        std::cout << "\033[1m\u001b[36m\033[4mPoints in the Convex Hull\u001b[0m" << std::endl << std::endl;
+        for(auto point : polygon_points){
+            std::cout << point << std::endl;
+        }
     }
-
     Polygon pol{polygon_points};    
     return pol;
 }   
 
-Rectangle ch_rectangle(std::vector<Point> points){
+Rectangle ch_rectangle(std::vector<Point> points, bool verbose=false){
     Polygon convex_hull{ch_polygon(points)};
     Rectangle rect;
     return rect;
