@@ -31,34 +31,45 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
         std::cout << lowest_point <<std::endl;
     }    
 
-    // Cloud without the lowest point
-    std::map<float, Point> cloud;
+    // Create map of points, using angle as key and <Point, distance> as value
+    // Map automatically sort the keys in increasing order
+    std::map<float, std::pair<Point, float>> cloud;
     for(auto point : points){
         if(!(point == lowest_point)){
-            // TODO: Check the case where more points have same angle, but different distances
             float angle = atan2(point.getY() - lowest_point.getY(), 
-            point.getX() - lowest_point.getX());
-            cloud.insert({angle, point});
+                            point.getX() - lowest_point.getX());
+            float distance = sqrt(pow(point.getX() - lowest_point.getX(), 2) 
+                                + pow(point.getY() - lowest_point.getY(), 2));
+            // Test if the angle already exists. If the angle exists, use the point with the bigger distance.
+            std::pair<Point, float> point_and_radius{point, distance};
+            if ( cloud.find(angle) == cloud.end() ) {                
+                cloud.insert({angle, point_and_radius});
+            } else {
+                float actual_distance = cloud.at(angle).second;
+                if(actual_distance < distance){
+                    cloud.at(angle) = point_and_radius;
+                }
+            }            
         }        
     } 
 
-    // Automatic sorted in map template
+    // Create a new empty vector only with sorted points 
     std::vector <Point> sorted_points{lowest_point};
     if(verbose == true){
         std::cout << "\033[1m\u001b[36m\033[4mSorted cloud of points (without lowest point)\u001b[0m" << std::endl << std::endl;
     }
-
     for(auto point : cloud){
         if(verbose == true){
-            std::cout << point.second << ": " << point.first << std::endl;
+            std::cout << point.second.first << ", angle: " << point.first << ", r: " << point.second.second << std::endl;
         }
-        sorted_points.push_back(point.second); // Add point to vector
+        sorted_points.push_back(point.second.first); // Add point to vector
     }
     if(verbose == true){
         std::cout << "\033[1m\u001b[36m\033[4mDetermine left and right turns\u001b[0m" << std::endl << std::endl;
     }
     
-    // Iterate all the sorted points to create new vector of points (left/right turn part)
+    // Iterate sorted points to discard the sequence of points that generate a right (negative) turn.
+    // The turn is calculated using the cross product between last 2 points and actual point
     std::vector <Point> polygon_points; // lowest point is the first point
     for(auto it = sorted_points.begin(); it != sorted_points.end(); ++it){
         int index = it - sorted_points.begin();
@@ -78,9 +89,11 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
             }
             
             if(cross_product < 0){
+                // Right turn (negative)
                 polygon_points.pop_back();
                 polygon_points.push_back(*it);
             } else {
+                // Left turn (positive) and collinear points (cross product = 0)
                 polygon_points.push_back(*it);
             }  
         }
