@@ -1,3 +1,6 @@
+#ifndef POLYGON_H
+#define POLYGON_H
+
 #include "point.h"
 #include <vector>
 #include <iostream>
@@ -34,3 +37,5 @@ class Polygon {
 
         // Convex Hull Polygon 
 };
+
+#endif

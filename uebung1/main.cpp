@@ -1,9 +1,9 @@
+#include "point.h"
+#include "polygon.h"
 #include "rectangle.h"
 #include <vector>
 #include <iostream>
-#include <algorithm>
 #include <cmath>
-#include <string>
 #include <map>
 
 Polygon convex_hull_polygon(std::vector <Point> points);

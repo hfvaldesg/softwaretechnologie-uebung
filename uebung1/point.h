@@ -1,3 +1,6 @@
+#ifndef POINT_H
+#define POINT_H
+
 #include <iostream>
 
 class Point final{
@@ -35,3 +38,5 @@ class Point final{
             return (this->getX() == other.x) && (this->getY() == other.y);
         }
 };
+
+#endif

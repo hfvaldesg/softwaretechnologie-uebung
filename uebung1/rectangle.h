@@ -1,3 +1,6 @@
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
+
 #include "polygon.h"
 #include <vector>
 #include <iostream>
@@ -14,3 +17,5 @@ class Rechteck: public Polygon{
         Rechteck& operator=(Rechteck&&) = default;
         virtual ~Rechteck() = default;
 };
+
+#endif
