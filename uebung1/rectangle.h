@@ -5,7 +5,7 @@
 class Rechteck: public Polygon{
     public:
         Rechteck(){}
-        Rechteck(std::vector<Punkt> _punkte): Polygon(_punkte){
+        Rechteck(std::vector<Point> _points): Polygon(_points){
         }
         // Rule of five: default
         Rechteck(const Rechteck&) = default;

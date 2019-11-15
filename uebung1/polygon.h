@@ -1,13 +1,13 @@
-#include "punkt.h"
+#include "point.h"
 #include <vector>
 #include <iostream>
 
 class Polygon {
     protected:
-        std::vector<Punkt> punkte;
+        std::vector<Point> points;
     public:
         Polygon(){}
-        Polygon(std::vector<Punkt> _punkte): punkte(_punkte){}
+        Polygon(std::vector<Point> _points): points(_points){}
         // Rule of five: default
         Polygon(const Polygon&) = default;
         Polygon(Polygon&&) = default;
@@ -15,19 +15,19 @@ class Polygon {
         Polygon& operator=(Polygon&&) = default;
         virtual ~Polygon() = default;
 
-        void setPunkte(std::vector<Punkt> _punkte){
-            punkte = _punkte;
+        void setPunkte(std::vector<Point> _points){
+            points = _points;
         }
-        std::vector<Punkt> getPunkte(){
-            return punkte;
+        std::vector<Point> getPunkte(){
+            return points;
         }
-        void addPunkt(Punkt _punkt){
-            punkte.push_back(_punkt);
+        void addPunkt(Point _point){
+            points.push_back(_point);
         }
         void print(){
             std::cout <<"Liste aller Punkte: "<< std::endl;
-            for(auto punkt : punkte){
-                std::cout << punkt << ", ";
+            for(auto point : points){
+                std::cout << point << ", ";
             }
             std::cout << std::endl;
         }

@@ -1,17 +1,17 @@
 #include <iostream>
 
-class Punkt final{
+class Point final{
     private:
         float x;
         float y;   
     public:
-        Punkt(float _x, float _y): x(_x), y(_y){}
-        Punkt(){}
-        ~Punkt() = default;
-        Punkt(const Punkt&) = default;  
-        Punkt(Punkt&&) = default;
-        Punkt& operator=(const Punkt&) = default;
-        Punkt& operator=(Punkt&&) = default;
+        Point(float _x, float _y): x(_x), y(_y){}
+        Point(){}
+        ~Point() = default;
+        Point(const Point&) = default;  
+        Point(Point&&) = default;
+        Point& operator=(const Point&) = default;
+        Point& operator=(Point&&) = default;
 
         void setX(float _x){
             x = _x;
@@ -26,12 +26,12 @@ class Punkt final{
             return y;
         }
         friend std::ostream& operator<<(std::ostream& os, 
-                                        const Punkt& pkt){
-            os << "(" << pkt.x 
-            << ", " << pkt.y << ")";
+                                        const Point& point){
+            os << "(" << point.x 
+            << ", " << point.y << ")";
             return os;
         }
-        bool operator==(const Punkt& other ){
+        bool operator==(const Point& other ){
             return (this->getX() == other.x) && (this->getY() == other.y);
         }
 };
