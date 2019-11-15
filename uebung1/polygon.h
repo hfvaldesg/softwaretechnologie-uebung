@@ -18,10 +18,10 @@ class Polygon {
         Polygon& operator=(Polygon&&) = default;
         virtual ~Polygon() = default;
 
-        void setPunkte(std::vector<Point> _points){
+        void setPoins(std::vector<Point> _points){
             points = _points;
         }
-        std::vector<Point> getPunkte(){
+        std::vector<Point> getPoints(){
             return points;
         }
         void addPunkt(Point _point){

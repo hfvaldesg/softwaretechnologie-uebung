@@ -108,8 +108,39 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
     return pol;
 }   
 
-Rectangle ch_rectangle(std::vector<Point> points, bool verbose=false){
-    Polygon convex_hull{ch_polygon(points)};
+Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
+    Polygon convex_hull{ch_polygon(_points)};
+    std::vector<Point> points{convex_hull.getPoints()};
+
+    // Obtain angle for every point and create new rotated vector
+    for(auto point : points){
+        float angle = atan2(point.getY(), point.getX());
+        std::vector<Point> rotated_points;
+        std::pair<Point, float> min_x, max_x, min_y, max_y;
+        for(auto p : points){
+            //rotate the points
+            double rotated_x = cos(angle) * p.getX() - sin(angle) * p.getY();
+            double rotated_y = sin(angle) * p.getX() + cos(angle) * p.getY();
+            Point rotated_point{(float) rotated_x,(float) rotated_y};
+            // Determine min/max x,y of rotated points
+            if(rotated_point.getX() < min_x.first.getX()){
+                min_x = {rotated_point, rotated_point.getX()};
+            }
+            if(rotated_point.getX() > min_x.first.getX()){
+                max_x = {rotated_point, rotated_point.getX()};
+            }
+            if(rotated_point.getY() < min_x.first.getY()){
+                min_y = {rotated_point, rotated_point.getY()};
+            }
+            if(rotated_point.getY() > min_x.first.getY()){
+                max_y = {rotated_point, rotated_point.getY()};
+            }
+        }
+        float area{
+            (max_x.second - min_x.second) * (max_y.second - min_x.second)
+        };
+    }   
+
     Rectangle rect;
     return rect;
 }
