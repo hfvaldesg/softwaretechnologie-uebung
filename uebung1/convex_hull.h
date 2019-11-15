@@ -14,7 +14,7 @@ void printDiv(){
     std::cout << "---- ---- ----" << std::endl;
 }
 
-Polygon convex_hull_polygon(std::vector <Point> points){
+Polygon ch_polygon(std::vector<Point> points){
     // Using Graham Scan Algorithm    
 
     // Find lowest y of the cloud of points
@@ -86,4 +86,9 @@ Polygon convex_hull_polygon(std::vector <Point> points){
     return pol;
 }   
 
+Rectangle ch_rectangle(std::vector<Point> points){
+    Polygon convex_hull{ch_polygon(points)};
+    Rectangle rect;
+    return rect;
+}
 #endif

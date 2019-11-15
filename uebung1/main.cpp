@@ -15,6 +15,7 @@ int main(){
     Point p7 {1, 4};
     
     std::vector <Point> points {p1, p2, p3, p4, p5, p6, p7};   
-    convex_hull_polygon(points);
+    ch_polygon(points);
+    ch_rectangle(points);
     return 0;
 }
