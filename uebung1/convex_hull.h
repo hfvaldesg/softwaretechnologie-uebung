@@ -8,6 +8,7 @@
 #include <iostream>
 #include <cmath>
 #include <map>
+#include <algorithm>
 
 
 Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
@@ -113,38 +114,64 @@ Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
     std::vector<Point> points{convex_hull.getPoints()};
 
     // Obtain angle for every point and create new rotated vector
+    // Save the area and rectangle for every rotated possibility
+    std::map<float, Rectangle> area_rectangle_dict;
     for(auto point : points){
         double angle = atan2(point.getY(), point.getX());
         std::pair<Point, double> min_x, max_x, min_y, max_y;
-        for(auto p : points){
+        for(auto it = points.begin(); it != points.end(); ++it){
             //rotate the points
-            double rotated_x = cos(angle) * p.getX() - sin(angle) * p.getY();
-            double rotated_y = sin(angle) * p.getX() + cos(angle) * p.getY();
-            Point rotated_point{rotated_x, rotated_y};
-            // Determine min/max x,y of rotated points
-            if(rotated_point.getX() < min_x.first.getX()){
-                min_x = {rotated_point, rotated_point.getX()};
-            }
-            if(rotated_point.getX() > min_x.first.getX()){
-                max_x = {rotated_point, rotated_point.getX()};
-            }
-            if(rotated_point.getY() < min_x.first.getY()){
-                min_y = {rotated_point, rotated_point.getY()};
-            }
-            if(rotated_point.getY() > min_x.first.getY()){
-                max_y = {rotated_point, rotated_point.getY()};
-            }            
+            double rotated_x = cos(angle) * it->getX() - sin(angle) * it->getY();
+            double rotated_y = sin(angle) * it->getX() + cos(angle) * it->getY();
+            if(it == points.begin()){
+                min_x = {*it, rotated_x};
+                max_x = {*it, rotated_x};
+                min_y = {*it, rotated_y};
+                max_y = {*it, rotated_y};
+            } else {
+                // Determine min/max x,y of rotated points
+                if(rotated_x < min_x.second){
+                    min_x = {*it, rotated_x};
+                } else if(rotated_x > max_x.second){
+                    max_x = {*it, rotated_x};
+                }
+                if(rotated_y < min_y.second){
+                    min_y = {*it, rotated_y};
+                }else if(rotated_y > max_y.second){
+                    max_y = {*it, rotated_y};
+                } 
+            }                   
         }
         double area{
             (max_x.second - min_x.second) * (max_y.second - min_x.second)
         };
         std::vector<Point> minimal_points{
+            // Those are the original non-rotated points
             min_x.first, max_x.first, min_y.first, max_y.first
         };
-        Rectangle minimal_rect{minimal_points};        
-    }   
+        Rectangle minimal_rect{minimal_points};
+        // Store the information
+        area_rectangle_dict.insert({area, minimal_rect});        
+    }
 
+    // Sort the areas
+    std::vector<double> areas;
+    for(auto rect : area_rectangle_dict){
+        areas.push_back(rect.first);
+    }   
+    sort(areas.begin(), areas.end());
+
+    // Retrieve the minimal rectangle
     Rectangle rect;
+    rect = area_rectangle_dict.at(areas.at(0));
+
+    if(verbose == true){
+        std::cout << "\n\033[1m\u001b[36m\033[4mPoints in minimal rectangle\u001b[0m" << std::endl << std::endl;
+        for(auto point : rect.getPoints()){
+            std::cout << point << std::endl;
+        }
+    }
+    
     return rect;
 }
 #endif

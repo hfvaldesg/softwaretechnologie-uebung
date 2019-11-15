@@ -24,7 +24,7 @@ class Polygon {
         std::vector<Point> getPoints(){
             return points;
         }
-        void addPunkt(Point _point){
+        void addPoint(Point _point){
             points.push_back(_point);
         }
         void print(){
