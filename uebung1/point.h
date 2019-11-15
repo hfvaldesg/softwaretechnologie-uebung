@@ -5,10 +5,10 @@
 
 class Point final{
     private:
-        float x;
-        float y;   
+        double x;
+        double y;   
     public:
-        Point(float _x, float _y): x(_x), y(_y){}
+        Point(double _x, double _y): x(_x), y(_y){}
         Point(){}
         ~Point() = default;
         Point(const Point&) = default;  
@@ -16,16 +16,16 @@ class Point final{
         Point& operator=(const Point&) = default;
         Point& operator=(Point&&) = default;
 
-        void setX(float _x){
+        void setX(double _x){
             x = _x;
         }
-        float getX(){
+        double getX(){
             return x;
         }
-        void setY(float _y){
+        void setY(double _y){
             y = _y;
         }
-        float getY(){
+        double getY(){
             return y;
         }
         friend std::ostream& operator<<(std::ostream& os, 

@@ -33,19 +33,19 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
 
     // Create map of points, using angle as key and <Point, distance> as value
     // Map automatically sort the keys in increasing order
-    std::map<float, std::pair<Point, float>> cloud;
+    std::map<double, std::pair<Point, double>> cloud;
     for(auto point : points){
         if(!(point == lowest_point)){
-            float angle = atan2(point.getY() - lowest_point.getY(), 
+            double angle = atan2(point.getY() - lowest_point.getY(), 
                             point.getX() - lowest_point.getX());
-            float distance = sqrt(pow(point.getX() - lowest_point.getX(), 2) 
+            double distance = sqrt(pow(point.getX() - lowest_point.getX(), 2) 
                                 + pow(point.getY() - lowest_point.getY(), 2));
             // Test if the angle already exists. If the angle exists, use the point with the bigger distance.
-            std::pair<Point, float> point_and_radius{point, distance};
+            std::pair<Point, double> point_and_radius{point, distance};
             if ( cloud.find(angle) == cloud.end() ) {                
                 cloud.insert({angle, point_and_radius});
             } else {
-                float actual_distance = cloud.at(angle).second;
+                double actual_distance = cloud.at(angle).second;
                 if(actual_distance < distance){
                     cloud.at(angle) = point_and_radius;
                 }
@@ -114,14 +114,13 @@ Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
 
     // Obtain angle for every point and create new rotated vector
     for(auto point : points){
-        float angle = atan2(point.getY(), point.getX());
-        std::vector<Point> rotated_points;
-        std::pair<Point, float> min_x, max_x, min_y, max_y;
+        double angle = atan2(point.getY(), point.getX());
+        std::pair<Point, double> min_x, max_x, min_y, max_y;
         for(auto p : points){
             //rotate the points
             double rotated_x = cos(angle) * p.getX() - sin(angle) * p.getY();
             double rotated_y = sin(angle) * p.getX() + cos(angle) * p.getY();
-            Point rotated_point{(float) rotated_x,(float) rotated_y};
+            Point rotated_point{rotated_x, rotated_y};
             // Determine min/max x,y of rotated points
             if(rotated_point.getX() < min_x.first.getX()){
                 min_x = {rotated_point, rotated_point.getX()};
@@ -134,11 +133,15 @@ Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
             }
             if(rotated_point.getY() > min_x.first.getY()){
                 max_y = {rotated_point, rotated_point.getY()};
-            }
+            }            
         }
-        float area{
+        double area{
             (max_x.second - min_x.second) * (max_y.second - min_x.second)
         };
+        std::vector<Point> minimal_points{
+            min_x.first, max_x.first, min_y.first, max_y.first
+        };
+        Rectangle minimal_rect{minimal_points};        
     }   
 
     Rectangle rect;
