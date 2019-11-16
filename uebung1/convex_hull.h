@@ -118,53 +118,53 @@ Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
     std::map<float, Rectangle> area_rectangle_dict;
     for(auto point : points){
         double angle = atan2(point.getY(), point.getX());
-        std::pair<Point, double> min_x, max_x, min_y, max_y;
+        double min_x, max_x, min_y, max_y;
         for(auto it = points.begin(); it != points.end(); ++it){
             //rotate the points
             double rotated_x = cos(angle) * it->getX() - sin(angle) * it->getY();
             double rotated_y = sin(angle) * it->getX() + cos(angle) * it->getY();
             if(it == points.begin()){
-                min_x = {*it, rotated_x};
-                max_x = {*it, rotated_x};
-                min_y = {*it, rotated_y};
-                max_y = {*it, rotated_y};
+                min_x = rotated_x;
+                max_x = rotated_x;
+                min_y = rotated_y;
+                max_y = rotated_y;
             } else {
                 // Determine min/max x,y of rotated points
-                if(rotated_x < min_x.second){
-                    min_x = {*it, rotated_x};
-                } else if(rotated_x > max_x.second){
-                    max_x = {*it, rotated_x};
+                if(rotated_x < min_x){
+                    min_x = rotated_x;
+                } else if(rotated_x > max_x){
+                    max_x = rotated_x;
                 }
-                if(rotated_y < min_y.second){
-                    min_y = {*it, rotated_y};
-                }else if(rotated_y > max_y.second){
-                    max_y = {*it, rotated_y};
+                if(rotated_y < min_y){
+                    min_y = rotated_y;
+                }else if(rotated_y > max_y){
+                    max_y = rotated_y;
                 } 
             }                   
         }
         double area{
-            (max_x.second - min_x.second) * (max_y.second - min_x.second)
+            (max_x - min_x) * (max_y - min_x)
         };
         // Rotation in the other direction (negative)
         // Right - Up corner
         Point right_up_corner {
-            cos(angle) * max_x.second + sin(angle) * max_y.second,
-            -1 * sin(angle) * max_x.second + cos(angle) * max_y.second 
+            cos(angle) * max_x + sin(angle) * max_y,
+            -1 * sin(angle) * max_x + cos(angle) * max_y 
         };
         // Left - Up corner
         Point left_up_corner {
-            cos(angle) * min_x.second + sin(angle) * max_y.second,
-            -1 * sin(angle) * min_x.second + cos(angle) * max_y.second 
+            cos(angle) * min_x + sin(angle) * max_y,
+            -1 * sin(angle) * min_x + cos(angle) * max_y 
         };
         // Right - Down corner
         Point right_down_corner {
-            cos(angle) * max_x.second + sin(angle) * min_y.second,
-            -1 * sin(angle) * max_x.second + cos(angle) * min_y.second 
+            cos(angle) * max_x + sin(angle) * min_y,
+            -1 * sin(angle) * max_x + cos(angle) * min_y 
         };
         // Left - Down corner
         Point left_down_corner {
-            cos(angle) * min_x.second + sin(angle) * min_y.second,
-            -1 * sin(angle) * min_x.second + cos(angle) * min_y.second 
+            cos(angle) * min_x + sin(angle) * min_y,
+            -1 * sin(angle) * min_x + cos(angle) * min_y
         };
 
         std::vector<Point> minimal_points{
