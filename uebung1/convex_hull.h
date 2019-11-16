@@ -145,9 +145,30 @@ Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
         double area{
             (max_x.second - min_x.second) * (max_y.second - min_x.second)
         };
+        // Rotation in the other direction (negative)
+        // Right - Up corner
+        Point right_up_corner {
+            cos(angle) * max_x.second + sin(angle) * max_y.second,
+            -1 * sin(angle) * max_x.second + cos(angle) * max_y.second 
+        };
+        // Left - Up corner
+        Point left_up_corner {
+            cos(angle) * min_x.second + sin(angle) * max_y.second,
+            -1 * sin(angle) * min_x.second + cos(angle) * max_y.second 
+        };
+        // Right - Down corner
+        Point right_down_corner {
+            cos(angle) * max_x.second + sin(angle) * min_y.second,
+            -1 * sin(angle) * max_x.second + cos(angle) * min_y.second 
+        };
+        // Left - Down corner
+        Point left_down_corner {
+            cos(angle) * min_x.second + sin(angle) * min_y.second,
+            -1 * sin(angle) * min_x.second + cos(angle) * min_y.second 
+        };
+
         std::vector<Point> minimal_points{
-            // Those are the original non-rotated points
-            min_x.first, max_x.first, min_y.first, max_y.first
+            right_up_corner, left_up_corner, right_down_corner, left_down_corner
         };
         Rectangle minimal_rect{minimal_points};
         // Store the information
