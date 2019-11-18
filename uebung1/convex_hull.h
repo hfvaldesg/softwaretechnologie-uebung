@@ -26,11 +26,7 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
                 lowest_point = *it;
             }
         }
-    }
-    if(verbose == true){
-        std::cout << "\033[1m\u001b[36m\033[4mLowest point in the cloud\u001b[0m" << std::endl << std::endl;
-        std::cout << lowest_point <<std::endl;
-    }    
+    }  
 
     // Create map of points, using angle as key and <Point, distance> as value
     // Map automatically sort the keys in increasing order
@@ -56,17 +52,8 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
 
     // Create a new empty vector only with sorted points 
     std::vector <Point> sorted_points{lowest_point};
-    if(verbose == true){
-        std::cout << "\033[1m\u001b[36m\033[4mSorted cloud of points (without lowest point)\u001b[0m" << std::endl << std::endl;
-    }
     for(auto point : cloud){
-        if(verbose == true){
-            std::cout << point.second.first << ", angle: " << point.first << ", r: " << point.second.second << std::endl;
-        }
         sorted_points.push_back(point.second.first); // Add point to vector
-    }
-    if(verbose == true){
-        std::cout << "\033[1m\u001b[36m\033[4mDetermine left and right turns\u001b[0m" << std::endl << std::endl;
     }
     
     // Iterate sorted points to discard the sequence of points that generate a right (negative) turn.
@@ -82,13 +69,7 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
             Point p3 = *it;
             double cross_product = (p2.getX() - p1.getX()) * (p3.getY() - p2.getY())
                                 - (p2.getY() - p1.getY()) * (p3.getX() - p2.getX());
-            if(verbose == true){
-                std::cout << "p1: " << p1 << std::endl;
-                std::cout << "p2: " << p2 << std::endl;
-                std::cout << "p3: " << p3 << std::endl;
-                std::cout << "cross product: " << cross_product << std::endl << std::endl;
-            }
-            
+                        
             if(cross_product < 0){
                 // Right turn (negative)
                 polygon_points.pop_back();
@@ -99,12 +80,7 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
             }  
         }
     }
-    if(verbose == true){
-        std::cout << "\033[1m\u001b[36m\033[4mPoints in the Convex Hull\u001b[0m" << std::endl << std::endl;
-        for(auto point : polygon_points){
-            std::cout << point << std::endl;
-        }
-    }
+
     Polygon pol{polygon_points};    
     return pol;
 }   
@@ -186,13 +162,6 @@ Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
     Rectangle rect;
     rect = area_rectangle_dict.at(areas.at(0));
 
-    if(verbose == true){
-        std::cout << "\n\033[1m\u001b[36m\033[4mPoints in minimal rectangle\u001b[0m" << std::endl << std::endl;
-        for(auto point : rect.getPoints()){
-            std::cout << point << std::endl;
-        }
-    }
-    
     return rect;
 }
 #endif

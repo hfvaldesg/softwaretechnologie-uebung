@@ -3,7 +3,7 @@
 #include "rectangle.h"
 #include "convex_hull.h"
 #include <vector>
-
+#include <iostream>
 
 int main(){
     // Point p1 {1, 1};
@@ -61,8 +61,17 @@ int main(){
         p1, p2, p3, p4, p5, 
         p6, p7, p8, p9, p10,
         p11, p12, p14, p15};   
-    ch_polygon(points, true);
-    ch_rectangle(points, true);
+
+    Polygon convex_hull_polygon{ch_polygon(points)};
+    Rectangle minimal_rectangle{ch_rectangle(points)};
+
+    std::cout << "\033[4m\033[1m\u001b[36mConvex Hull Polygon\u001b[0m" << std::endl;
+    convex_hull_polygon.print();
+
+    std::cout << std::endl;
+
+    std::cout << "\033[4m\033[1m\u001b[36mMinimal Area Rectangle\u001b[0m" << std::endl;
+    minimal_rectangle.print();
 
     return 0;
 }

@@ -28,14 +28,11 @@ class Polygon {
             points.push_back(_point);
         }
         void print(){
-            std::cout <<"Liste aller Punkte: "<< std::endl;
             for(auto point : points){
                 std::cout << point << ", ";
             }
             std::cout << std::endl;
         }
-
-        // Convex Hull Polygon 
 };
 
 #endif
