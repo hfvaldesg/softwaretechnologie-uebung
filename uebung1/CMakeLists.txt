@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(uebung1)
 include_directories("./include")
-set (PROJECT_SOURCES main.cpp)
+set (PROJECT_SOURCES ./src/main.cpp)
 
 
 add_executable(ue1 ${PROJECT_SOURCES})
