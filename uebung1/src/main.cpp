@@ -4,8 +4,9 @@
 #include "convex_hull.h"
 #include <vector>
 #include <iostream>
+#include <fstream>
 
-int main(){
+int main(){    
     // Point p1 {1, 1};
     // Point p2 {3, 1};
     // Point p3 {6, 2};
@@ -71,6 +72,30 @@ int main(){
 
     std::cout << "\033[4m\033[1m\u001b[36mMinimal Area Rectangle\u001b[0m" << std::endl;
     minimal_rectangle.print();
+
+    // Save the cloud of points
+    std::ofstream allPointsFile;
+    allPointsFile.open("all-points.txt");
+    for(auto point : points){
+        allPointsFile << point.getX() << " " << point.getY() << std::endl;;
+    }
+    
+    // Save the polygon points
+    std::ofstream polygonFile;
+    polygonFile.open("polygon-points.txt");
+    for(auto point : convex_hull_polygon.getPoints()){
+        polygonFile << point.getX() << " " << point.getY() << std::endl;;
+    }
+    polygonFile.close();
+
+    // Save the rectangle points
+    std::ofstream rectangleFile;
+    rectangleFile.open("rectangle-points.txt");
+    for(auto point : minimal_rectangle.getPoints()){
+        rectangleFile << point.getX() << " " << point.getY() << std::endl;;
+    }
+    rectangleFile.close();
+    
 
     return 0;
 }
