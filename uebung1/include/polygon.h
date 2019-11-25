@@ -33,6 +33,12 @@ class Polygon {
       }
       std::cout << std::endl;
     }
+    Point getCenter(){
+      // Obtain center of polygon
+      Point center;
+
+      return center;
+    }
 };
 
 #endif

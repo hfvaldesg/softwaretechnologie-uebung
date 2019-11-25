@@ -94,6 +94,7 @@ Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
     std::map<float, Rectangle> area_rectangle_dict;
     for(auto point : points){
         double angle = atan2(point.getY(), point.getX());
+        std::cout << angle << std::endl;
         double min_x, max_x, min_y, max_y;
         for(auto it = points.begin(); it != points.end(); ++it){
             //rotate the points
@@ -119,8 +120,10 @@ Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
             }                   
         }
         double area{
-            (max_x - min_x) * (max_y - min_x)
+            std::abs((max_x - min_x) * (max_y - min_x))
         };
+        std::cout << area << std::endl;
+        std::cout << "----" << std::endl;
         // Rotation in the other direction (negative)
         // Right - Up corner
         Point right_up_corner {
