@@ -15,46 +15,10 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
     // Using Graham Scan Algorithm    
 
     // Find lowest y of the cloud of points
-    Point lowest_point;
-    for(auto it = points.begin(); it != points.end(); ++it){
-        if(it == points.begin()){
-            lowest_point = *it;
-        } else {
-            if(it->getY() < lowest_point.getY()){
-                lowest_point = *it;
-            } else if( (it->getY() == lowest_point.getY()) && (it->getX() < lowest_point.getX())){
-                lowest_point = *it;
-            }
-        }
-    }  
-
-    // Create map of points, using angle as key and <Point, distance> as value
-    // Map automatically sort the keys in increasing order
-    std::map<double, std::pair<Point, double>> cloud;
-    for(auto point : points){
-        if(!(point == lowest_point)){
-            double angle = atan2(point.getY() - lowest_point.getY(), 
-                            point.getX() - lowest_point.getX());
-            double distance = sqrt(pow(point.getX() - lowest_point.getX(), 2) 
-                                + pow(point.getY() - lowest_point.getY(), 2));
-            // Test if the angle already exists. If the angle exists, use the point with the bigger distance.
-            std::pair<Point, double> point_and_radius{point, distance};
-            if ( cloud.find(angle) == cloud.end() ) {                
-                cloud.insert({angle, point_and_radius});
-            } else {
-                double actual_distance = cloud.at(angle).second;
-                if(actual_distance < distance){
-                    cloud.at(angle) = point_and_radius;
-                }
-            }            
-        }        
-    } 
+    Point lowest_point{lowestPoint(points)};
 
     // Create a new empty vector only with sorted points 
-    std::vector <Point> sorted_points{lowest_point};
-    for(auto point : cloud){
-        sorted_points.push_back(point.second.first); // Add point to vector
-    }
+    std::vector <Point> sorted_points{sort_points_to_reference(lowest_point, points)};
     
     // Iterate sorted points to discard the sequence of points that generate a right (negative) turn.
     // The turn is calculated using the cross product between last 2 points and actual point
@@ -88,7 +52,7 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
 Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
     Polygon convex_hull{ch_polygon(_points)};
     std::vector<Point> points{convex_hull.getPoints()};
-
+    convex_hull.getCenter();
     // Obtain angle for every point and create new rotated vector
     // Save the area and rectangle for every rotated possibility
     std::map<float, Rectangle> area_rectangle_dict;
