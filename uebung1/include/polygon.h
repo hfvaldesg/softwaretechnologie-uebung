@@ -25,18 +25,22 @@ class Polygon {
     void setPoins(std::vector<Point> _points){
       points = _points;
     }
+    
     std::vector<Point> getPoints(){
       return points;
     }
+
     void addPoint(Point _point){
       points.push_back(_point);
     }
+
     void print(){
       for(auto point : points){
         std::cout << point << ", ";
       }
       std::cout << std::endl;
-    }    
+    }  
+
     Point getCenter(){
       // Obtain center of polygon
       // Order the points
@@ -66,7 +70,6 @@ class Polygon {
         x_weight / total_area,
         y_weight / total_area
       };
-      std::cout << "Center of polygon: " << center << std::endl;
       return center;
     }
 };

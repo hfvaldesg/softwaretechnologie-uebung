@@ -12,7 +12,7 @@
 #include <algorithm>
 
 
-Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
+Polygon ch_polygon(std::vector<Point> points){
     // Using Graham Scan Algorithm    
 
     // Find lowest y of the cloud of points
@@ -34,11 +34,31 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
             Point p3 = *it;
             double cross_product = (p2.getX() - p1.getX()) * (p3.getY() - p2.getY())
                                 - (p2.getY() - p1.getY()) * (p3.getX() - p2.getX());
-                        
             if(cross_product < 0){
                 // Right turn (negative)
                 polygon_points.pop_back();
-                polygon_points.push_back(*it);
+                //polygon_points.push_back(*it);
+
+                // Check for previous turn with new third point
+                bool new_cross_flag{true};
+                while(new_cross_flag){
+                    Point new_p1 = polygon_points.at(polygon_points.size() - 3);
+                    Point new_p2 = polygon_points.at(polygon_points.size() - 2);
+                    Point new_p3 = polygon_points.back();
+
+                    double new_cross_product = (new_p2.getX() - new_p1.getX()) * (new_p3.getY() - new_p2.getY())
+                                    - (new_p2.getY() - new_p1.getY()) * (new_p3.getX() - new_p2.getX());
+                    std::cout << "new cross: " << new_cross_product << std::endl;
+                    if(new_cross_product < 0){
+                        polygon_points.pop_back();
+                    } else {
+                        new_cross_flag = false;
+                        polygon_points.push_back(*it);
+                        break;
+                    }
+                }
+                
+
             } else {
                 // Left turn (positive) and collinear points (cross product = 0)
                 polygon_points.push_back(*it);
@@ -50,7 +70,7 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
     return pol;
 }   
 
-Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
+Rectangle ch_rectangle(std::vector<Point> _points){
     Polygon convex_hull{ch_polygon(_points)};
     std::vector<Point> points{convex_hull.getPoints()};
     Point center{convex_hull.getCenter()};

@@ -53,7 +53,6 @@ namespace helpers {
     }
 
     std::pair<double, std::vector<Point>> rotated_corners(std::vector<Point> points, double angle){
-        std::cout << angle << std::endl;
         double min_x, max_x, min_y, max_y;
         for(auto it = points.begin(); it != points.end(); ++it){
             //rotate the points
@@ -81,7 +80,6 @@ namespace helpers {
         double area{
             std::abs((max_x - min_x) * (max_y - min_x))
         };
-        std::cout << area << std::endl;
         // Rotation in the other direction (negative)
         // Right - Up corner
         Point right_up_corner {
