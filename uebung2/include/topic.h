@@ -10,7 +10,7 @@ class Topic{
     private:
         std::vector<std::shared_ptr<Subscriber>> subscribers;
     public:
-        Topic();
+        Topic(){};
         void addSubscriber(std::shared_ptr<Subscriber> new_subscriber){
             subscribers.push_back(new_subscriber);
         }

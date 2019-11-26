@@ -8,9 +8,9 @@
 
 class Subscriber {
     public:
-        Subscriber();
+        Subscriber(){};
         void showMessage(std::string message){
-            std::cout << "New message: " << message << std::endl;
+            std::cout << "New message shown in subscriber: " << message << std::endl;
         }
 };
 

@@ -11,7 +11,7 @@ class Publisher {
     private:
         std::shared_ptr<Topic> topic;
     public:
-        Publisher();
+        Publisher(){};
         Publisher(std::shared_ptr<Topic> _topic): topic(_topic){
 
         }
@@ -25,7 +25,7 @@ class Publisher {
         };
 
         void sendMessage(std::string message){
-            
+            topic->publish(message);
         }
 };
 
