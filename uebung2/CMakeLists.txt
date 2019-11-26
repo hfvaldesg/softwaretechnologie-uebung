@@ -4,9 +4,9 @@ cmake_minimum_required(VERSION 2.8)
 
 # Project's name
 
-project(uebung1)
+project(uebung2)
 include_directories("./include")
 set (PROJECT_SOURCES ./src/main.cpp)
 
 
-add_executable(ue1 ${PROJECT_SOURCES})
+add_executable(ue2 ${PROJECT_SOURCES})
