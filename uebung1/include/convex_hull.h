@@ -42,9 +42,9 @@ Polygon ch_polygon(std::vector<Point> points){
                 // Check for previous turn with new third point
                 bool new_cross_flag{true};
                 while(new_cross_flag){
-                    Point new_p1 = polygon_points.at(polygon_points.size() - 3);
-                    Point new_p2 = polygon_points.at(polygon_points.size() - 2);
-                    Point new_p3 = polygon_points.back();
+                    Point new_p1 = polygon_points.at(polygon_points.size() - 2);
+                    Point new_p2 = polygon_points.at(polygon_points.size() - 1);
+                    Point new_p3 = *it;
 
                     double new_cross_product = (new_p2.getX() - new_p1.getX()) * (new_p3.getY() - new_p2.getY())
                                     - (new_p2.getY() - new_p1.getY()) * (new_p3.getX() - new_p2.getX());
