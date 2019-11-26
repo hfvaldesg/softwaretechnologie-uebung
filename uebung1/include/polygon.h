@@ -2,6 +2,7 @@
 #define POLYGON_H
 
 #include "point.h"
+#include "helpers.h"
 #include <vector>
 #include <iostream>
 #include <cmath>
@@ -39,8 +40,8 @@ class Polygon {
     Point getCenter(){
       // Obtain center of polygon
       // Order the points
-      Point lowest_point{lowestPoint(points)};
-      std::vector <Point> sorted_points{sort_points_to_reference(lowest_point, points)};
+      Point lowest_point{helpers::lowestPoint(points)};
+      std::vector <Point> sorted_points{helpers::sort_points_to_reference(lowest_point, points)};
       double total_area{0};
       double x_weight{0};
       double y_weight{0};

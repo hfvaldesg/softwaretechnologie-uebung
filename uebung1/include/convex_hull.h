@@ -4,6 +4,7 @@
 #include "point.h"
 #include "polygon.h"
 #include "rectangle.h"
+#include "helpers.h"
 #include <vector>
 #include <iostream>
 #include <cmath>
@@ -15,10 +16,10 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
     // Using Graham Scan Algorithm    
 
     // Find lowest y of the cloud of points
-    Point lowest_point{lowestPoint(points)};
+    Point lowest_point{helpers::lowestPoint(points)};
 
     // Create a new empty vector only with sorted points 
-    std::vector <Point> sorted_points{sort_points_to_reference(lowest_point, points)};
+    std::vector <Point> sorted_points{helpers::sort_points_to_reference(lowest_point, points)};
     
     // Iterate sorted points to discard the sequence of points that generate a right (negative) turn.
     // The turn is calculated using the cross product between last 2 points and actual point
@@ -56,66 +57,24 @@ Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
     // Obtain angle for every point and create new rotated vector
     // Save the area and rectangle for every rotated possibility
     std::map<float, Rectangle> area_rectangle_dict;
+
+    // For the original position (non rotated)
+    {
+        double angle{0};
+        std::pair<double, std::vector<Point>> pair_area_points {helpers::rotated_corners(points, angle)};
+        Rectangle minimal_rect{pair_area_points.second};
+        // Store the information
+        area_rectangle_dict.insert({pair_area_points.first, minimal_rect});  
+    }    
+
     for(auto point : points){
+        // For the rotated vertices
         double angle = atan2(point.getY() - center.getY(), 
                             point.getX() - center.getX());
-        std::cout << angle << std::endl;
-        double min_x, max_x, min_y, max_y;
-        for(auto it = points.begin(); it != points.end(); ++it){
-            //rotate the points
-            double rotated_x = cos(angle) * it->getX() - sin(angle) * it->getY();
-            double rotated_y = sin(angle) * it->getX() + cos(angle) * it->getY();
-            if(it == points.begin()){
-                min_x = rotated_x;
-                max_x = rotated_x;
-                min_y = rotated_y;
-                max_y = rotated_y;
-            } else {
-                // Determine min/max x,y of rotated points
-                if(rotated_x < min_x){
-                    min_x = rotated_x;
-                } else if(rotated_x > max_x){
-                    max_x = rotated_x;
-                }
-                if(rotated_y < min_y){
-                    min_y = rotated_y;
-                }else if(rotated_y > max_y){
-                    max_y = rotated_y;
-                } 
-            }                   
-        }
-        double area{
-            std::abs((max_x - min_x) * (max_y - min_x))
-        };
-        std::cout << area << std::endl;
-        // Rotation in the other direction (negative)
-        // Right - Up corner
-        Point right_up_corner {
-            cos(angle) * max_x + sin(angle) * max_y,
-            -1 * sin(angle) * max_x + cos(angle) * max_y 
-        };
-        // Left - Up corner
-        Point left_up_corner {
-            cos(angle) * min_x + sin(angle) * max_y,
-            -1 * sin(angle) * min_x + cos(angle) * max_y 
-        };
-        // Right - Down corner
-        Point right_down_corner {
-            cos(angle) * max_x + sin(angle) * min_y,
-            -1 * sin(angle) * max_x + cos(angle) * min_y 
-        };
-        // Left - Down corner
-        Point left_down_corner {
-            cos(angle) * min_x + sin(angle) * min_y,
-            -1 * sin(angle) * min_x + cos(angle) * min_y
-        };
-
-        std::vector<Point> minimal_points{
-            right_up_corner, left_up_corner, right_down_corner, left_down_corner
-        };
-        Rectangle minimal_rect{minimal_points};
+        std::pair<double, std::vector<Point>> pair_area_points {helpers::rotated_corners(points, angle)};
+        Rectangle minimal_rect{pair_area_points.second};
         // Store the information
-        area_rectangle_dict.insert({area, minimal_rect});        
+        area_rectangle_dict.insert({pair_area_points.first, minimal_rect});        
     }
 
     // Sort the areas
