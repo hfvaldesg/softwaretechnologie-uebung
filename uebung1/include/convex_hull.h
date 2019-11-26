@@ -52,12 +52,13 @@ Polygon ch_polygon(std::vector<Point> points, bool verbose=false){
 Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
     Polygon convex_hull{ch_polygon(_points)};
     std::vector<Point> points{convex_hull.getPoints()};
-    convex_hull.getCenter();
+    Point center{convex_hull.getCenter()};
     // Obtain angle for every point and create new rotated vector
     // Save the area and rectangle for every rotated possibility
     std::map<float, Rectangle> area_rectangle_dict;
     for(auto point : points){
-        double angle = atan2(point.getY(), point.getX());
+        double angle = atan2(point.getY() - center.getY(), 
+                            point.getX() - center.getX());
         std::cout << angle << std::endl;
         double min_x, max_x, min_y, max_y;
         for(auto it = points.begin(); it != points.end(); ++it){
@@ -87,7 +88,6 @@ Rectangle ch_rectangle(std::vector<Point> _points, bool verbose=false){
             std::abs((max_x - min_x) * (max_y - min_x))
         };
         std::cout << area << std::endl;
-        std::cout << "----" << std::endl;
         // Rotation in the other direction (negative)
         // Right - Up corner
         Point right_up_corner {
