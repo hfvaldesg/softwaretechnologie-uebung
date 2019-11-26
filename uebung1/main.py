@@ -59,4 +59,5 @@ plt.scatter(all_points_x, all_points_y)
 # plt.scatter([x for x,y in rectangle_points], [y for x,y in rectangle_points])
 
 plt.ylabel('All Points')
+plt.gca().set_aspect('equal', adjustable='box')
 plt.savefig("all-points.png")

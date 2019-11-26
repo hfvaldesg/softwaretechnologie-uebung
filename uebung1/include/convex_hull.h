@@ -48,7 +48,6 @@ Polygon ch_polygon(std::vector<Point> points){
 
                     double new_cross_product = (new_p2.getX() - new_p1.getX()) * (new_p3.getY() - new_p2.getY())
                                     - (new_p2.getY() - new_p1.getY()) * (new_p3.getX() - new_p2.getX());
-                    std::cout << "new cross: " << new_cross_product << std::endl;
                     if(new_cross_product < 0){
                         polygon_points.pop_back();
                     } else {
