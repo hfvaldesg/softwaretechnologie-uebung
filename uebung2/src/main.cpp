@@ -1,6 +1,7 @@
 #include "publisher.h"
 #include "subscriber.h"
 #include "topic.h"
+#include "broker.h"
 #include <memory>
 
 int main(){
