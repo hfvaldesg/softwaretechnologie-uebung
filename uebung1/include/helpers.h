@@ -8,7 +8,7 @@
 #include <map>
 #include <algorithm>
 namespace helpers {
-    Point lowestPoint(std::vector<Point> points){
+    Point lowest_point(std::vector<Point> points){
         Point lowest_point;
         for(auto it = points.begin(); it != points.end(); ++it){
             if(it == points.begin()){

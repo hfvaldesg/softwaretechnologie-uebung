@@ -16,7 +16,7 @@ Polygon ch_polygon(std::vector<Point> points){
     // Using Graham Scan Algorithm    
 
     // Find lowest y of the cloud of points
-    Point lowest_point{helpers::lowestPoint(points)};
+    Point lowest_point{helpers::lowest_point(points)};
 
     // Create a new empty vector only with sorted points 
     std::vector <Point> sorted_points{helpers::sort_points_to_reference(lowest_point, points)};
@@ -55,8 +55,7 @@ Polygon ch_polygon(std::vector<Point> points){
                         polygon_points.push_back(*it);
                         break;
                     }
-                }
-                
+                }                
 
             } else {
                 // Left turn (positive) and collinear points (cross product = 0)
@@ -106,7 +105,6 @@ Rectangle ch_rectangle(std::vector<Point> _points){
     // Retrieve the minimal rectangle
     Rectangle rect;
     rect = area_rectangle_dict.at(areas.at(0));
-
     return rect;
 }
 #endif
