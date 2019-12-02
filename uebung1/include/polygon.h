@@ -8,6 +8,8 @@
 #include <cmath>
 #include <map>
 #include <algorithm>
+#include <string>
+#include <fstream>
 
 class Polygon {
   protected:
@@ -71,6 +73,15 @@ class Polygon {
         y_weight / total_area
       };
       return center;
+    }
+
+    void writePoints(std::string filename){
+      std::ofstream polygonFile;
+      polygonFile.open(filename);
+      for(auto point : points){
+          polygonFile << point.getX() << " " << point.getY() << std::endl;;
+      }
+      polygonFile.close();
     }
 };
 
