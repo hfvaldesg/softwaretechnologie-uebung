@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <time.h>
 
 int main(){    
     // Point p1 {1, 1};
@@ -30,7 +32,7 @@ int main(){
 
     // Point p1 {3, 3};
     // Point p2 {-3, 3};
-    // Point p3 {-3, -3};
+    // Point p3 {-3, -3};r
     // Point p4 {3, -3};
     // Point p5 {1, 1};
     // Point p6 {-1, 1};
@@ -61,6 +63,16 @@ int main(){
         p1, p2, p3, p4, p5, 
         p6, p7, p8, p9, p10,
         p11, p12, p14, p15};   
+
+    // Random seed
+    // srand(time(NULL));
+    // std::vector<Point> points{};
+    // for(int i = 0; i <= 200 ; i++){
+    //     double x = rand() % 200;
+    //     double y = rand() % 200; 
+    //     Point rand_point{x, y};
+    //     points.push_back(rand_point);
+    // }
 
     Polygon convex_hull_polygon{ch_polygon(points)};
     Rectangle minimal_rectangle{ch_rectangle(points)};
