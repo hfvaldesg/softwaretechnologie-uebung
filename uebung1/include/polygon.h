@@ -46,7 +46,7 @@ class Polygon {
     Point getCenter(){
       // Obtain center of polygon
       // Order the points
-      Point lowest_point{helpers::lowestPoint(points)};
+      Point lowest_point{helpers::lowest_point(points)};
       std::vector <Point> sorted_points{helpers::sort_points_to_reference(lowest_point, points)};
       double total_area{0};
       double x_weight{0};
