@@ -18,16 +18,7 @@ def process_points(filename):
 
 if __name__ == "__main__":
     # Process "all-points.txt" file
-    all_points_file = open("./all-points.txt", "r")
-    all_points_x = list()
-    all_points_y = list()
-    for line in all_points_file:
-        x = float(line.split(" ")[0])
-        y = float(line.split(" ")[1].split("\n")[0])
-        all_points_x.append(x)
-        all_points_y.append(y)
-
-    all_points_file.close()
+    all_points = process_points("./all-points.txt")
 
     # Process "polygon-points.txt" file
     polygon_points = process_points("./polygon-points.txt")
@@ -59,7 +50,9 @@ if __name__ == "__main__":
     ax.add_collection(p)
 
     # Add all the points
-    plt.scatter(all_points_x, all_points_y)
+    plt.scatter([coord[0] for coord in all_points], 
+                [coord[1] for coord in all_points]
+    )
 
     # Plot the graph
     plt.ylabel('All Points')
