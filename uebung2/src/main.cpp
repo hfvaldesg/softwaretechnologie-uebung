@@ -15,5 +15,7 @@ int main(){
     pub_ptr->setTopic(topic_ptr);
 
     pub_ptr->sendMessage("Hallo von Publisher!");
+    std::shared_ptr<Broker> broker = Broker::getInstance();
+    
     return 0;
 }
