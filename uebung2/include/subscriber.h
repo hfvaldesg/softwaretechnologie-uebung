@@ -10,7 +10,7 @@ class Subscriber {
     public:
         Subscriber(){};
         void showMessage(std::string message){
-            std::cout << "New message shown in subscriber: " << message << std::endl;
+            std::cout << "\033[1m\u001b[36mMessage in subscriber\u001b[0m: " << message << std::endl;
         }
 };
 

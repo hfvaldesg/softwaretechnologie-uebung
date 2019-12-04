@@ -9,7 +9,7 @@ class Broker {
     // Implementation of a Broker following the Singleton Pattern
     private:
         Broker(){};
-        std::vector<Subscriber> subscribers;     
+        std::vector<std::shared_ptr<Subscriber>> subscribers;     
     public:        
         static std::shared_ptr<Broker> getInstance(){
             std::shared_ptr<Broker> instance;
@@ -18,12 +18,12 @@ class Broker {
             }
             return instance;
         }
-        void add_subscriber(Subscriber subscriber){
+        void add_subscriber(std::shared_ptr<Subscriber> subscriber){
             subscribers.push_back(subscriber);
         }
         void publish(std::string message){
             for(auto subscriber : subscribers){
-                subscriber.showMessage(message);
+                subscriber->showMessage(message);
             }
         }
 };
