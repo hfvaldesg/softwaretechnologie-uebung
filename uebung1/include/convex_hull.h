@@ -13,7 +13,7 @@
 
 
 Polygon ch_polygon(std::vector<Point> points){
-    // Using Graham Scan Algorithm    
+    // Calculate the Convex Hull Polygon using the "Graham Scan" Algorithm    
 
     // Find lowest y of the cloud of points
     Point lowest_point{helpers::lowest_point(points)};
@@ -69,6 +69,8 @@ Polygon ch_polygon(std::vector<Point> points){
 }   
 
 Rectangle ch_rectangle(std::vector<Point> _points){
+    // Calculate the Minimal Ara Rectangle. It depends of previously defined ch_polygon function.
+
     Polygon convex_hull{ch_polygon(_points)};
     std::vector<Point> points{convex_hull.getPoints()};
     Point center{convex_hull.getCenter()};

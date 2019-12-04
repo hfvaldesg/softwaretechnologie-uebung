@@ -37,6 +37,7 @@ class Polygon {
     }
 
     void print(){
+      // Print all the points in the Polygon separeted by a comma
       for(auto point : points){
         std::cout << point << ", ";
       }
@@ -45,7 +46,6 @@ class Polygon {
 
     Point getCenter(){
       // Obtain center of polygon
-      // Order the points
       Point lowest_point{helpers::lowest_point(points)};
       std::vector <Point> sorted_points{helpers::sort_points_to_reference(lowest_point, points)};
       double total_area{0};
@@ -76,6 +76,7 @@ class Polygon {
     }
 
     void writePoints(std::string filename){
+      // Write the points in a file
       std::ofstream polygonFile;
       polygonFile.open(filename);
       for(auto point : points){

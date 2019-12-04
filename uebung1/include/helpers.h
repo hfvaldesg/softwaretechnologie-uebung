@@ -9,6 +9,8 @@
 #include <algorithm>
 namespace helpers {
     Point lowest_point(std::vector<Point> points){
+        // Find lowest point (y-axis) in a cloud of points
+        // If there are 2 minimal points, choose the one with the minimal x coordinate (left-down corner)
         Point lowest_point;
         for(auto it = points.begin(); it != points.end(); ++it){
             if(it == points.begin()){
@@ -25,6 +27,7 @@ namespace helpers {
     }
 
     std::vector<Point> sort_points_to_reference(Point reference, std::vector<Point> points){
+        // Sort the points in the cloud depending of the angle to the reference. Lowest angle first
         std::map<double, std::pair<Point, double>> cloud;
         for(auto point : points){
             if(!(point == reference)){
@@ -53,6 +56,7 @@ namespace helpers {
     }
 
     std::pair<double, std::vector<Point>> rotated_corners(std::vector<Point> points, double angle){
+        // Obtain a pair composed by an area and a vector of corners, which form a rectangle
         double min_x, max_x, min_y, max_y;
         for(auto it = points.begin(); it != points.end(); ++it){
             //rotate the points
