@@ -17,7 +17,14 @@ int main(){
     std::shared_ptr<Broker> broker = Broker::getInstance();
     broker->add_subscriber(sub_ptr);
     pub_ptr->setBroker(broker);
-    pub_ptr->sendMessage("Message from publisher!");
+
+    // Exercise 1: Hello World
+    std::cout << "Exercise 1" << std::endl;
+    int COUNT = 10;
+    for(int i = 1; i <= COUNT; i++){
+        pub_ptr->sendMessage(std::to_string(i));
+    }
+    
 
     return 0;
 }
