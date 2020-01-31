@@ -1,0 +1,7 @@
+[2.310s] [01m[K/home/hernan/softwaretechnologie-uebung/uebung3/src/hello_world/src/publisher_member_function.cpp:5:10:[m[K [01;31m[Kfatal error: [m[Kstd_msgs/msg/string.hpp: No such file or directory
+[2.310s]  #include [01;31m[K"std_msgs/msg/string.hpp"[m[K
+[2.310s]           [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[2.310s] compilation terminated.
+[2.313s] make[2]: *** [CMakeFiles/talker.dir/src/publisher_member_function.cpp.o] Error 1
+[2.314s] make[1]: *** [CMakeFiles/talker.dir/all] Error 2
+[2.314s] make: *** [all] Error 2

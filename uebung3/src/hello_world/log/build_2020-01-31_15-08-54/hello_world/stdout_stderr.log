@@ -1,0 +1,11 @@
+[0.240s] [ 50%] [32mBuilding CXX object CMakeFiles/talker.dir/src/publisher.cpp.o[0m
+[0.342s] [01m[K/home/hernan/softwaretechnologie-uebung/uebung3/src/hello_world/src/publisher.cpp:5:10:[m[K [01;31m[Kfatal error: [m[Kstd_msgs/msg/string.hpp: No such file or directory
+[0.342s]  #include [01;31m[K"std_msgs/msg/string.hpp"[m[K
+[0.343s]           [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.343s] compilation terminated.
+[0.346s] CMakeFiles/talker.dir/build.make:62: recipe for target 'CMakeFiles/talker.dir/src/publisher.cpp.o' failed
+[0.347s] make[2]: *** [CMakeFiles/talker.dir/src/publisher.cpp.o] Error 1
+[0.348s] CMakeFiles/Makefile2:451: recipe for target 'CMakeFiles/talker.dir/all' failed
+[0.349s] make[1]: *** [CMakeFiles/talker.dir/all] Error 2
+[0.349s] make: *** [all] Error 2
+[0.350s] Makefile:140: recipe for target 'all' failed

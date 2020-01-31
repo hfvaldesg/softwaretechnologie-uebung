@@ -1,0 +1,9 @@
+[6.519s] CMake Error at /home/hernan/ros2_eloquent/install/ament_cmake_core/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:53 (message):
+[6.519s]   ament_package_xml() package name 'hello_world' in '/package.xml' does not
+[6.519s]   match current PROJECT_NAME 'cpp_pubsub'.  You must call project() with the
+[6.519s]   same package name before.
+[6.519s] Call Stack (most recent call first):
+[6.520s]   /home/hernan/ros2_eloquent/install/ament_cmake_core/share/ament_cmake_core/cmake/core/ament_package.cmake:63 (ament_package_xml)
+[6.520s]   CMakeLists.txt:24 (ament_package)
+[6.520s] 
+[6.520s] 
