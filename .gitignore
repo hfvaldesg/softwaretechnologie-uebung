@@ -12,3 +12,6 @@ _deps
 .vscode
 ue1
 venv/
+log/
+install/
+build/

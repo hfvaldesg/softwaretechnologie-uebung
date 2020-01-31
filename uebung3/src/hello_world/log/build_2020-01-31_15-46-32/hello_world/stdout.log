@@ -1,4 +1,0 @@
-[0.261s] [ 50%] [32mBuilding CXX object CMakeFiles/talker.dir/src/publisher_member_function.cpp.o[0m
-[0.401s] CMakeFiles/talker.dir/build.make:62: recipe for target 'CMakeFiles/talker.dir/src/publisher_member_function.cpp.o' failed
-[0.402s] CMakeFiles/Makefile2:451: recipe for target 'CMakeFiles/talker.dir/all' failed
-[0.402s] Makefile:140: recipe for target 'all' failed
