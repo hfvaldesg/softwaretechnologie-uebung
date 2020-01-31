@@ -1,7 +1,8 @@
-#include "publisher.h"
-#include "subscriber.h"
-#include "topic.h"
-#include "broker.h"
+#include <publisher.h>
+#include <subscriber.h>
+#include <topic.h>
+#include <broker.h>
+#include <pingpong.h>
 #include <memory>
 
 int main(){
@@ -22,6 +23,9 @@ int main(){
     for(int i = 1; i <= COUNT; i++){
         pub1->sendMessage(std::to_string(i));
     }
+
+    // Exercise 2: Ping/Pong
+    std::shared_ptr<Topic> topicPingPong = std::make_shared<Topic>("pingpong");
     
 
     return 0;
