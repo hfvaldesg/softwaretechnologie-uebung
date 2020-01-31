@@ -1,0 +1,58 @@
+[0.072s] -- The C compiler identification is GNU 7.4.0
+[0.128s] -- The CXX compiler identification is GNU 7.4.0
+[0.133s] -- Check for working C compiler: /usr/bin/cc
+[0.206s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.207s] -- Detecting C compiler ABI info
+[0.295s] -- Detecting C compiler ABI info - done
+[0.300s] -- Detecting C compile features
+[0.513s] -- Detecting C compile features - done
+[0.517s] -- Check for working CXX compiler: /usr/bin/c++
+[0.597s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.597s] -- Detecting CXX compiler ABI info
+[0.681s] -- Detecting CXX compiler ABI info - done
+[0.685s] -- Detecting CXX compile features
+[1.051s] -- Detecting CXX compile features - done
+[1.053s] -- Found ament_cmake: 0.8.2 (/opt/ros/eloquent/share/ament_cmake/cmake)
+[1.079s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.6.9", minimum required is "3") 
+[1.079s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.275s] -- Found rclcpp: 0.8.4 (/opt/ros/eloquent/share/rclcpp/cmake)
+[1.295s] -- Found rosidl_adapter: 0.8.2 (/opt/ros/eloquent/share/rosidl_adapter/cmake)
+[1.335s] -- Found rmw_implementation_cmake: 0.8.1 (/opt/ros/eloquent/share/rmw_implementation_cmake/cmake)
+[1.337s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.338s] -- Looking for pthread.h
+[1.405s] -- Looking for pthread.h - found
+[1.405s] -- Looking for pthread_create
+[1.479s] -- Looking for pthread_create - not found
+[1.480s] -- Looking for pthread_create in pthreads
+[1.536s] -- Looking for pthread_create in pthreads - not found
+[1.537s] -- Looking for pthread_create in pthread
+[1.604s] -- Looking for pthread_create in pthread - found
+[1.605s] -- Found Threads: TRUE  
+[1.645s] -- Found std_msgs: 0.8.1 (/opt/ros/eloquent/share/std_msgs/cmake)
+[1.721s] -- Configuring done
+[1.734s] -- Generating done
+[1.736s] -- Build files have been written to: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/build/hello_world
+[1.783s] [35m[1mScanning dependencies of target talker[0m
+[1.812s] [ 50%] [32mBuilding CXX object CMakeFiles/talker.dir/src/publisher_member_function.cpp.o[0m
+[4.197s] [100%] [32m[1mLinking CXX executable talker[0m
+[4.351s] [100%] Built target talker
+[4.452s] [100%] Built target talker
+[4.473s] [36mInstall the project...[0m
+[4.482s] -- Install configuration: ""
+[4.483s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/lib/hello_world/talker
+[4.484s] -- Set runtime path of "/home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/lib/hello_world/talker" to ""
+[4.484s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/ament_index/resource_index/package_run_dependencies/hello_world
+[4.484s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/ament_index/resource_index/parent_prefix_path/hello_world
+[4.484s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/environment/ament_prefix_path.sh
+[4.484s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/environment/ament_prefix_path.dsv
+[4.485s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/environment/path.sh
+[4.485s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/environment/path.dsv
+[4.485s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/local_setup.bash
+[4.485s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/local_setup.sh
+[4.485s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/local_setup.zsh
+[4.486s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/local_setup.dsv
+[4.486s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/package.dsv
+[4.486s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/ament_index/resource_index/packages/hello_world
+[4.486s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/cmake/hello_worldConfig.cmake
+[4.486s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/cmake/hello_worldConfig-version.cmake
+[4.487s] -- Installing: /home/hernan/Projects/softwaretechnologie-uebung/uebung3/src/hello_world/install/hello_world/share/hello_world/package.xml
