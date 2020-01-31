@@ -6,23 +6,21 @@
 
 int main(){
     // Define the shared pointers
-    // std::shared_ptr<Topic> topic_ptr = std::make_shared<Topic>();
-    std::shared_ptr<Subscriber> sub_ptr = std::make_shared<Subscriber>();
-    std::shared_ptr<Publisher> pub_ptr = std::make_shared<Publisher>();
-    
-    // Set pub-sub relationships
-    // topic_ptr->addSubscriber(sub_ptr);
-    // pub_ptr->setTopic(topic_ptr);
+    std::shared_ptr<Topic> topic1 = std::make_shared<Topic>("topic1");
+    std::shared_ptr<Subscriber> sub1 = std::make_shared<Subscriber>(topic1);
+    std::shared_ptr<Subscriber> sub2 = std::make_shared<Subscriber>(topic1);
+    std::shared_ptr<Publisher> pub1 = std::make_shared<Publisher>(topic1);
 
     std::shared_ptr<Broker> broker = Broker::getInstance();
-    broker->add_subscriber(sub_ptr);
-    pub_ptr->setBroker(broker);
+    broker->add_subscriber(sub1);
+    broker->add_subscriber(sub2);
+    pub1->setBroker(broker);
 
     // Exercise 1: Hello World
     std::cout << "Exercise 1" << std::endl;
     int COUNT = 10;
     for(int i = 1; i <= COUNT; i++){
-        pub_ptr->sendMessage(std::to_string(i));
+        pub1->sendMessage(std::to_string(i));
     }
     
 

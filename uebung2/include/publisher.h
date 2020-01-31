@@ -1,8 +1,8 @@
 #ifndef PUBLISHER_H
 #define PUBLISHER_H
 
-#include "topic.h"
-#include "broker.h"
+#include <topic.h>
+#include <broker.h>
 #include <iostream>
 #include <vector>
 #include <memory>
@@ -13,10 +13,7 @@ class Publisher {
         std::shared_ptr<Topic> topic;
         std::shared_ptr<Broker> broker;
     public:
-        Publisher(){};
-        Publisher(std::shared_ptr<Topic> _topic): topic(_topic){
-
-        }
+        Publisher(std::shared_ptr<Topic> _topic): topic(_topic){}
 
         void setTopic(std::shared_ptr<Topic> _topic){
             topic = _topic;
@@ -35,7 +32,7 @@ class Publisher {
         }
 
         void sendMessage(std::string message){
-            broker->publish(message);
+            broker->publish(message, topic);
         }
 };
 

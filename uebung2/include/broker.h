@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include <topic.h>
 #include <subscriber.h>
 
 class Broker {
@@ -18,12 +19,16 @@ class Broker {
             }
             return instance;
         }
+        
         void add_subscriber(std::shared_ptr<Subscriber> subscriber){
             subscribers.push_back(subscriber);
         }
-        void publish(std::string message){
+
+        void publish(std::string message, std::shared_ptr<Topic> topic){
             for(auto subscriber : subscribers){
-                subscriber->showMessage(message);
+                if(subscriber->getTopic() == topic){
+                    subscriber->showMessage(message);
+                }                
             }
         }
 };

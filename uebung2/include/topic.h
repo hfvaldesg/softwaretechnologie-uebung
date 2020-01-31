@@ -1,23 +1,20 @@
 #ifndef TOPIC_H
 #define TOPIC_H
 
-#include "subscriber.h"
-#include <vector>
-#include <iostream>
-#include <memory>
+#include <string>
 
 class Topic{
     private:
-        std::vector<std::shared_ptr<Subscriber>> subscribers;
+        std::string name;
     public:
-        Topic(){};
-        void addSubscriber(std::shared_ptr<Subscriber> new_subscriber){
-            subscribers.push_back(new_subscriber);
+        Topic(std::string _name): name(_name){}
+
+        void setName(std::string _name){
+            name = _name;
         }
-        void publish(std::string message){
-            for(auto subscriber : subscribers){
-                subscriber->showMessage(message);
-            }
+
+        std::string getName(){
+            return name;
         }
 };
 
