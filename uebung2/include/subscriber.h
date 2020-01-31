@@ -22,8 +22,14 @@ class Subscriber {
         }
 
         void showMessage(std::string message){
-            std::cout << "\033[1m\u001b[36mMessage in subscriber\u001b[0m: " 
+            if(message != "Ping"){
+                std::cout << "\033[1m\u001b[36mMessage in subscriber\u001b[0m: " 
                 << message << std::endl;
+            } else {
+                std::cout << "\033[1m\u001b[36mMessage in subscriber\u001b[0m: " 
+                << "Pong" << std::endl;
+            }
+            
         }
 };
 

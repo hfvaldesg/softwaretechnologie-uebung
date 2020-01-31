@@ -6,6 +6,8 @@
 #include <publisher.h>
 #include <broker.h>
 #include <memory>
+#include <iostream>
+#include <string>
 
 class PingPong {
     private:
@@ -16,6 +18,16 @@ class PingPong {
     public:
         PingPong(std::shared_ptr<Topic> _topic, 
             std::shared_ptr<Broker> _broker): topic(_topic), broker(_broker){
+                subscriber = std::make_shared<Subscriber>(topic);
+                publisher = std::make_shared<Publisher>(topic);
+                publisher->setBroker(broker);
+                broker->add_subscriber(subscriber);
+        }
+
+        void sendPing(){
+            std::string message{"Ping"};
+            std::cout << message << std::endl;
+            publisher->sendMessage(message);
         }
 };
 

@@ -24,9 +24,17 @@ int main(){
         pub1->sendMessage(std::to_string(i));
     }
 
+    std::cout << "\n---- ----\n" << std::endl;
+
     // Exercise 2: Ping/Pong
+    std::cout << "Exercise 2" << std::endl;
     std::shared_ptr<Topic> topicPingPong = std::make_shared<Topic>("pingpong");
-    
+    PingPong ping_pong{topicPingPong, broker};
+
+    COUNT = 10;
+    for(int i = 1; i <= COUNT; i++){
+        ping_pong.sendPing();
+    }    
 
     return 0;
 }
